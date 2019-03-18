@@ -1,12 +1,14 @@
-import * as React from 'react';
+﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
-import { LoginModel } from '../models/LoginModel';
+import { RegisterModel } from '../models/RegisterModel';
 import FormTextField from './FormTextField';
+import { Link } from 'react-router-dom';
 
-export class Home extends React.Component<RouteComponentProps<{}>, {}> {
+export class Register extends React.Component<RouteComponentProps<{}>, {}> {
 
-    state: LoginModel = {
+    state: RegisterModel = {
+        username: "test",
         email: "test",
         password: "test"
     };
@@ -34,35 +36,44 @@ export class Home extends React.Component<RouteComponentProps<{}>, {}> {
     public render() {
         return <div className="container">
             <div className="os-form">
-                <h1>Othello Server Login</h1>
-                <hr/>
+                <h1>Othello Server Register</h1>
+                <hr />
                 <form action="/api/accounts" method="POST">
+                    <FormTextField
+                        inputName='username'
+                        labelText='Username'
+                        inputId='username'
+                        inputType='text'
+                        onChange={this.handleChange}
+                        inputText=''
+                        error={undefined}
+                    />
                     <FormTextField
                         inputName='email'
                         labelText='Email'
                         inputId='email'
+                        inputType='text'
                         onChange={this.handleChange}
                         inputText=''
-                        error=''
+                        error={undefined}
                     />
                     <FormTextField
                         inputName='password'
                         labelText='Password'
                         inputId='password'
+                        inputType='password'
                         onChange={this.handleChange}
                         inputText=''
-                        error=''
+                        error={undefined}
                     />
                     <div className="form-actions single">
-                        <button className="btn btn-primary" type="submit">Sign In</button>
+                        <button className="btn btn-primary" type="submit">Register</button>
                     </div>
                 </form>
             </div>
             <div className="os-form">
-                New to Othello Server? <a href="www.google.com">Register</a>
+                Have an Account? <Link to="/">Login</Link>
             </div>
         </div>;
     }
-
-
 }

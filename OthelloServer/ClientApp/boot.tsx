@@ -21,7 +21,7 @@ function renderApp() {
     const rootElement: HTMLElement | null = document.getElementById('react-app');
     // Get the application-wide store instance, prepopulating with state from the server where available.
     const initialState: ApplicationState = {
-
+        loginState: null
     };
 
     const store: Store<ApplicationState> = configureStore(history, initialState);
