@@ -13,7 +13,8 @@ interface LoginState {
 export class Login extends React.Component<RouteComponentProps<{}>, {}> {
 
     state: LoginState;
-    constructor(props: RouteComponentProps<{}>) {
+
+    constructor(props: RouteComponentProps<any> | undefined) {
         super(props);
         this.state = {
             email: '',

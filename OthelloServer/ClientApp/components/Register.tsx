@@ -15,13 +15,18 @@ interface RegisterState {
 
 export class Register extends React.Component<RouteComponentProps<{}>, {}> {
 
-    state: RegisterState = {
-        username: "",
-        email: "",
-        password: "",
-        error: {},
-        redirect: false
-    };
+    state: RegisterState;
+
+    constructor(props: RouteComponentProps<any> | undefined) {
+        super(props);
+        this.state = {
+            username: '',
+            email: '',
+            password: '',
+            error: {},
+            redirect: false
+        }
+    }
 
     handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         const target: HTMLInputElement = e.target as HTMLInputElement;
