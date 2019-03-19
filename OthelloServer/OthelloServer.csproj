@@ -18,25 +18,32 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\models\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\models\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="ClientApp\models\**" />
+    <None Remove="ClientApp\models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="ClientApp\components\FormTextField.tsx" />
-    <None Remove="ClientApp\models\LoginModel.tsx" />
+    <None Remove="ClientApp\components\Private.tsx" />
     <None Remove="ClientApp\reducers\ConfigureStore.tsx" />
     <None Remove="ClientApp\reducers\Home.tsx" />
     <None Remove="ClientApp\reducers\RootReducer.tsx" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\models\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\components\FormTextField.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Private.tsx" />
     <TypeScriptCompile Include="ClientApp\configureStore.tsx" />
     <TypeScriptCompile Include="ClientApp\reducers\Home.tsx" />
     <TypeScriptCompile Include="ClientApp\reducers\RootReducer.tsx" />

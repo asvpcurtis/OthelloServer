@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { LoginSuccess, LoginFailure, LoginModel, login} from '../requests/Auth';
+import { LoginSuccess, LoginFailure, LoginModel, login} from '../services/Auth';
 import FormTextField from './FormTextField';
 import { Link, Redirect } from 'react-router-dom';
 
@@ -8,7 +8,6 @@ interface LoginState {
     email: string;
     password: string;
     error: LoginFailure;
-    redirect: boolean;
 }
 export class Login extends React.Component<RouteComponentProps<{}>, {}> {
 
@@ -19,8 +18,7 @@ export class Login extends React.Component<RouteComponentProps<{}>, {}> {
         this.state = {
             email: '',
             password: '',
-            error: {},
-            redirect: false
+            error: {}
         }
     }
 
@@ -37,20 +35,14 @@ export class Login extends React.Component<RouteComponentProps<{}>, {}> {
             email: this.state.email,
             password: this.state.password
         }
-        login(payload, (res: LoginSuccess) => {
-            localStorage.setItem('OthelloServerJwt', res.token)
-            this.setState({redirect: true})
+        login(payload, () => {
+            this.props.history.push('/counter');
         }, (err: LoginFailure) => {
             this.setState({ error: err })
-            console.log(this.state);
         });
     }
     
     public render() {
-        if (this.state.redirect) {
-            this.props.history.push('/');
-            return <Redirect to="/counter" />
-        }
         return <div className="container">
             <div className="os-form">
                 <h1>Othello Server Login</h1>

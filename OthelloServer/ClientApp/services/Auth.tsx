@@ -1,4 +1,7 @@
-﻿export interface LoginFailure
+﻿const JwtKey: string = 'OthelloServerJwt';
+const JwtExpirationKey: string = 'OthelloServerJwtExpiration';
+
+export interface LoginFailure
 {
     login_failure?: string[];
     Password?: string[];
@@ -18,7 +21,7 @@ export interface LoginModel
 }
 
 export function login(data: LoginModel,
-    success: (res: LoginSuccess) => void,
+    success: () => void,
     failure: (err: LoginFailure) => void)
 {
     const url: string = "api/login";
@@ -32,11 +35,26 @@ export function login(data: LoginModel,
     fetch(url, options).then(response => {
         if (response.status == 200) {
             const promise: Promise<LoginSuccess> = response.json();
-            promise.then(payload => success(payload));
+            promise.then(payload => {
+                localStorage.setItem(JwtKey, payload.token);
+                localStorage.setItem(JwtExpirationKey, payload.expiration);
+            });
+            success();
         }
         else {
             const promise: Promise<LoginFailure> = response.json();
             promise.then(payload => failure(payload));
         }
     });
+}
+
+export function logout() {
+    localStorage.removeItem(JwtKey);
+    localStorage.removeItem(JwtExpirationKey);
+}
+
+export function isLoggedIn(): boolean {
+    const jwtExists: boolean = localStorage.getItem(JwtKey) != null;
+    const jwtExpirationExists: boolean = localStorage.getItem(JwtExpirationKey) != null;
+    return jwtExists && jwtExpirationExists;
 }

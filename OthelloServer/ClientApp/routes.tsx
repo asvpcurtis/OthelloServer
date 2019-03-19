@@ -5,13 +5,16 @@ import { Login } from './components/Login';
 import { Register } from './components/Register'
 import { FetchData } from './examples/FetchData';
 import { Counter } from './examples/Counter';
+import { Private } from './components/Private';
 
 
 export const routes = 
     <Switch>
         <Route exact path="/" component={Login} />
         <Route path="/register" component={Register} />
-        <Route path='/counter' component={Counter} />
+        <Private>
+            <Route path='/counter' component={Counter} />
+        </Private>
         <Route component={RoutesWithNavbar} />
     </Switch>;
 

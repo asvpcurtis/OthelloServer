@@ -1,5 +1,5 @@
 ﻿import { Reducer, combineReducers } from "redux";
-import { LoginModel } from '../requests/auth'
+import { LoginModel } from '../services/auth'
 
 export interface ApplicationState {
     loginState: LoginModel | null;

@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
-import { RegisterModel, RegisterFailure, register } from '../requests/Registration';
+import { RegisterModel, RegisterFailure, register } from '../services/Accounts';
 import FormTextField from './FormTextField';
 import { Link, Redirect } from 'react-router-dom';
 
@@ -10,7 +10,6 @@ interface RegisterState {
     email: string;
     password: string;
     error: RegisterFailure;
-    redirect: boolean;
 }
 
 export class Register extends React.Component<RouteComponentProps<{}>, {}> {
@@ -23,8 +22,7 @@ export class Register extends React.Component<RouteComponentProps<{}>, {}> {
             username: '',
             email: '',
             password: '',
-            error: {},
-            redirect: false
+            error: {}
         }
     }
 
@@ -42,24 +40,16 @@ export class Register extends React.Component<RouteComponentProps<{}>, {}> {
             email: this.state.email,
             password: this.state.password
         }
-        console.log(payload);
-        
         register(payload, () => {
-            this.setState({ redirect: true })
-            console.log('account created');
+            this.props.history.push('/login');
         }, (err: RegisterFailure) => {
             this.setState({ error: err })
-            console.log(this.state);
         });
         
     }
 
 
     public render() {
-        if (this.state.redirect) {
-            this.props.history.push('/register');
-            return <Redirect to='/' />
-        }
         const fail: RegisterFailure = this.state.error;
         return <div className="container">
             <div className="os-form">
