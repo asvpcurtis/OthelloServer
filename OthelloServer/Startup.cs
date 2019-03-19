@@ -46,6 +46,7 @@ namespace OthelloServer
             // Injects UserManager
             IdentityBuilder builder = services.AddIdentityCore<AppUser>(o =>
             {
+                o.User.RequireUniqueEmail = true;
                 // configure identity options
                 o.Password.RequireDigit = false;
                 o.Password.RequireLowercase = false;

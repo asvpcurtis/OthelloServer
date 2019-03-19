@@ -1,16 +1,26 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
-import { RegisterModel } from '../models/RegisterModel';
+import { RegisterModel, RegisterFailure, register } from '../requests/Registration';
 import FormTextField from './FormTextField';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+
+interface RegisterState {
+    username: string;
+    email: string;
+    password: string;
+    error: RegisterFailure;
+    redirect: boolean;
+}
 
 export class Register extends React.Component<RouteComponentProps<{}>, {}> {
 
-    state: RegisterModel = {
-        username: "test",
-        email: "test",
-        password: "test"
+    state: RegisterState = {
+        username: "",
+        email: "",
+        password: "",
+        error: {},
+        redirect: false
     };
 
     handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -19,26 +29,38 @@ export class Register extends React.Component<RouteComponentProps<{}>, {}> {
             [target.name]: target.value
         });
     };
-
-    isValid() {
-
-    }
+    
     onSubmit = (e: any) => {
         e.preventDefault();
-        /*
-        if (this.isValid()) {
-
+        const payload: RegisterModel = {
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password
         }
-        */
+        console.log(payload);
+        
+        register(payload, () => {
+            this.setState({ redirect: true })
+            console.log('account created');
+        }, (err: RegisterFailure) => {
+            this.setState({ error: err })
+            console.log(this.state);
+        });
+        
     }
 
 
     public render() {
+        if (this.state.redirect) {
+            this.props.history.push('/register');
+            return <Redirect to='/' />
+        }
+        const fail: RegisterFailure = this.state.error;
         return <div className="container">
             <div className="os-form">
                 <h1>Othello Server Register</h1>
                 <hr />
-                <form action="/api/accounts" method="POST">
+                <form onSubmit={this.onSubmit}>
                     <FormTextField
                         inputName='username'
                         labelText='Username'
@@ -46,7 +68,7 @@ export class Register extends React.Component<RouteComponentProps<{}>, {}> {
                         inputType='text'
                         onChange={this.handleChange}
                         inputText=''
-                        error={undefined}
+                        error={fail.UserName ? fail.UserName : fail.DuplicateUserName}
                     />
                     <FormTextField
                         inputName='email'
@@ -55,7 +77,7 @@ export class Register extends React.Component<RouteComponentProps<{}>, {}> {
                         inputType='text'
                         onChange={this.handleChange}
                         inputText=''
-                        error={undefined}
+                        error={fail.Email ? fail.Email : fail.DuplicateEmail}
                     />
                     <FormTextField
                         inputName='password'
@@ -64,7 +86,7 @@ export class Register extends React.Component<RouteComponentProps<{}>, {}> {
                         inputType='password'
                         onChange={this.handleChange}
                         inputText=''
-                        error={undefined}
+                        error={fail.Password ? fail.Password : fail.PasswordTooShort}
                     />
                     <div className="form-actions single">
                         <button className="btn btn-primary" type="submit">Register</button>

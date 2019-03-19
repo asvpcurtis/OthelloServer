@@ -33,8 +33,6 @@ namespace OthelloServer.Controllers
             AppUser userIdentity = new AppUser
             {
                 Email = model.Email,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
                 UserName = model.UserName
             };
 

@@ -2,7 +2,7 @@
 https://nguyentoanuit.wordpress.com/2017/11/25/setup-asp-net-core-react-redux/https://stackoverflow.com/questions/22842691/what-is-the-meaning-of-the-dist-directory-in-open-source-projects
 ## Webpack
 * webpack.config.js
-* is used to specify things like dis and boot-client
+* is used to specify things like dist and boot-client
 * 4 main concepts
     1. entry
         * entry: { 'main-client': './ClientApp/boot-client.tsx' }
@@ -81,3 +81,14 @@ https://nguyentoanuit.wordpress.com/2017/11/25/setup-asp-net-core-react-redux/ht
 	* similar to react router dom
 	* router in sync with application state
 * https://stackoverflow.com/questions/43185222/what-is-difference-between-react-router-4-0-react-router-dom-and-react-router-r
+
+## Entity framework
+* Migrations
+	* `dotnet ef migrations add [name for the migration]`
+		* this can be used to create OR update a class
+		* generates a migration file for this
+		* requires being able to build the project
+	* `dotnet ef database update`
+		* this applies migrations to the database
+		* requires being able to build the project
+	* https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/

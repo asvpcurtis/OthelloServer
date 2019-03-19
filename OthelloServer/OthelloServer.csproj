@@ -31,13 +31,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\models\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\components\FormTextField.tsx" />
     <TypeScriptCompile Include="ClientApp\configureStore.tsx" />
-    <TypeScriptCompile Include="ClientApp\models\LoginModel.tsx" />
     <TypeScriptCompile Include="ClientApp\reducers\Home.tsx" />
     <TypeScriptCompile Include="ClientApp\reducers\RootReducer.tsx" />
   </ItemGroup>

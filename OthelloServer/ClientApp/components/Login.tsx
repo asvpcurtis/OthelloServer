@@ -5,10 +5,10 @@ import FormTextField from './FormTextField';
 import { Link, Redirect } from 'react-router-dom';
 
 interface LoginState {
-    email: string,
-    password: string,
-    error: LoginFailure
-    redirect: boolean
+    email: string;
+    password: string;
+    error: LoginFailure;
+    redirect: boolean;
 }
 export class Login extends React.Component<RouteComponentProps<{}>, {}> {
 
@@ -36,7 +36,6 @@ export class Login extends React.Component<RouteComponentProps<{}>, {}> {
             email: this.state.email,
             password: this.state.password
         }
-        console.log(payload)
         login(payload, (res: LoginSuccess) => {
             localStorage.setItem('OthelloServerJwt', res.token)
             this.setState({redirect: true})
@@ -85,6 +84,4 @@ export class Login extends React.Component<RouteComponentProps<{}>, {}> {
             </div>
         </div>;
     }
-
-
 }

@@ -4,13 +4,13 @@ import classnames from 'classnames';
 // for form validation
 // https://github.com/Remchi/reddice/blob/master/server/shared/validations/login.js
 interface FormTextFieldProps {
-    inputName: string
-    inputId: string
-    labelText: string
-    inputText: string
-    inputType: string
-    onChange: React.EventHandler<React.ChangeEvent<HTMLInputElement>>
-    error?: string[]
+    inputName: string;
+    inputId: string;
+    labelText: string;
+    inputText: string;
+    inputType: string;
+    onChange: React.EventHandler<React.ChangeEvent<HTMLInputElement>>;
+    error?: string[];
 }
 const FormTextField = (props: FormTextFieldProps) => {
 

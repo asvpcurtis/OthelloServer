@@ -1,14 +1,14 @@
 ﻿export interface LoginFailure
 {
-    login_failure?: string[]
-    Password?: string[]
-    Email?: string[]
+    login_failure?: string[];
+    Password?: string[];
+    Email?: string[];
 }
 
 export interface LoginSuccess
 {
-    token: string,
-    expiration: string
+    token: string;
+    expiration: string;
 }
 
 export interface LoginModel

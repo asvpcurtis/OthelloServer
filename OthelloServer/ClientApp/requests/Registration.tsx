@@ -1,21 +1,19 @@
 ﻿export interface RegisterFailure {
-    login_failure?: string[]
-    Password?: string[]
-    Email?: string[]
+    DuplicateUserName?: string[];
+    DuplicateEmail?: string[];
+    UserName?: string[];
+    Password?: string[];
+    PasswordTooShort?: string[];
+    Email?: string[];
 }
-
-export interface RegisterSuccess {
-    token: string,
-    expiration: string
-}
-
 export interface RegisterModel {
+    username: string;
     email: string;
     password: string;
 }
 
-export function login(data: RegisterModel,
-    success: (res: RegisterSuccess) => void,
+export function register(data: RegisterModel,
+    success: () => void,
     failure: (err: RegisterFailure) => void) {
     const url: string = "api/accounts";
     const options: RequestInit = {
@@ -27,8 +25,7 @@ export function login(data: RegisterModel,
     };
     fetch(url, options).then(response => {
         if (response.status == 200) {
-            const promise: Promise<RegisterSuccess> = response.json();
-            promise.then(payload => success(payload));
+            success();
         }
         else {
             const promise: Promise<RegisterFailure> = response.json();
