@@ -3,8 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "devDependencies": {
+    "@aspnet/signalr": "^1.1.2",
     "@types/classnames": "^2.2.7",
     "@types/history": "4.6.0",
+    "@types/node": "^10.14.1",
     "@types/react": "15.0.35",
     "@types/react-dom": "15.5.1",
     "@types/react-hot-loader": "3.0.3",

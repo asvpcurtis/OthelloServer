@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { LoginSuccess, LoginFailure, LoginModel, login} from '../services/Auth';
 import FormTextField from './FormTextField';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface LoginState {
     email: string;
@@ -36,7 +36,7 @@ export class Login extends React.Component<RouteComponentProps<{}>, {}> {
             password: this.state.password
         }
         login(payload, () => {
-            this.props.history.push('/counter');
+            this.props.history.push('/');
         }, (err: LoginFailure) => {
             this.setState({ error: err })
         });

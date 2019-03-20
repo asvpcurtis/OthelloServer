@@ -11,6 +11,6 @@ export class Private extends React.Component<PrivateProps, {}> {
         if (isLoggedIn()) {
             return <div>{this.props.children}</div>;
         }
-        return <Redirect to='/' />;
+        return <Redirect to='/login' />;
     }
 }

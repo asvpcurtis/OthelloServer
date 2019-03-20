@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using OthelloServer.Hubs;
 using OthelloServer.Models;
 using System;
 using System.Text;
@@ -111,11 +112,12 @@ namespace OthelloServer
                 app.UseExceptionHandler("Home/Error");
                 //app.UseHsts();
             }
-            /*
-            app.UseSignalR(options => {
-                options.
+            
+            app.UseSignalR(routes => {
+                routes.MapHub<SeekHub>("/socket/seek");
+                routes.MapHub<GameHub>("/socket/game");
             });
-            */
+            
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();

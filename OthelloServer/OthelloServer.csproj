@@ -30,11 +30,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\components\Board.tsx" />
     <None Remove="ClientApp\components\FormTextField.tsx" />
     <None Remove="ClientApp\components\Private.tsx" />
     <None Remove="ClientApp\reducers\ConfigureStore.tsx" />
     <None Remove="ClientApp\reducers\Home.tsx" />
     <None Remove="ClientApp\reducers\RootReducer.tsx" />
+    <None Remove="ClientApp\services\GameSeek.tsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,11 +44,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\Board.tsx" />
     <TypeScriptCompile Include="ClientApp\components\FormTextField.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Private.tsx" />
     <TypeScriptCompile Include="ClientApp\configureStore.tsx" />
     <TypeScriptCompile Include="ClientApp\reducers\Home.tsx" />
     <TypeScriptCompile Include="ClientApp\reducers\RootReducer.tsx" />
+    <TypeScriptCompile Include="ClientApp\services\GameSeek.tsx" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

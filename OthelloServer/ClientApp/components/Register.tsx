@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router';
 
 import { RegisterModel, RegisterFailure, register } from '../services/Accounts';
 import FormTextField from './FormTextField';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface RegisterState {
     username: string;
