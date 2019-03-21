@@ -48,7 +48,6 @@
     <TypeScriptCompile Include="ClientApp\components\FormTextField.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Private.tsx" />
     <TypeScriptCompile Include="ClientApp\configureStore.tsx" />
-    <TypeScriptCompile Include="ClientApp\reducers\Home.tsx" />
     <TypeScriptCompile Include="ClientApp\reducers\RootReducer.tsx" />
     <TypeScriptCompile Include="ClientApp\services\GameSeek.tsx" />
   </ItemGroup>

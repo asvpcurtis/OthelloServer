@@ -33,7 +33,8 @@ namespace OthelloServer.Controllers
             AppUser userIdentity = new AppUser
             {
                 Email = model.Email,
-                UserName = model.UserName
+                UserName = model.UserName,
+                Rating = 1200
             };
 
             IdentityResult result = await _userManager.CreateAsync(userIdentity, model.Password);

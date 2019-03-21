@@ -8,5 +8,6 @@ namespace OthelloServer.Models
 {
     public class AppUser : IdentityUser
     {
+        public int Rating { get; set; }
     }
 }

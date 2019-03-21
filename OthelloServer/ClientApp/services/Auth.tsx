@@ -53,8 +53,12 @@ export function logout() {
     localStorage.removeItem(JwtExpirationKey);
 }
 
+// not exactly finished must verify the expiration
 export function isLoggedIn(): boolean {
     const jwtExists: boolean = localStorage.getItem(JwtKey) != null;
     const jwtExpirationExists: boolean = localStorage.getItem(JwtExpirationKey) != null;
     return jwtExists && jwtExpirationExists;
+}
+export function getJwt(): string | null {
+    return localStorage.getItem(JwtKey);
 }

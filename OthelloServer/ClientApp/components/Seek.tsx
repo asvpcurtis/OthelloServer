@@ -1,7 +1,8 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import connection from '../services/GameSeek';
+import { cancelSeek, acceptSeek, createSeek, SeekParameters } from '../services/GameSeek';
 interface SeekState {
+
 }
 
 export class Seek extends React.Component<RouteComponentProps<{}>, {}> {
@@ -14,10 +15,12 @@ export class Seek extends React.Component<RouteComponentProps<{}>, {}> {
         }
     }
 
-
     onclick(e: any) {
-        console.log('button clicked');
-        //connection.invoke('send', 'hello world');
+        const param: SeekParameters = {
+            Min: 0,
+            Max: 10000
+        }
+        createSeek(param);
     }
 
     public render() {
