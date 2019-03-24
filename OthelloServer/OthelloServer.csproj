@@ -32,12 +32,14 @@
   <ItemGroup>
     <None Remove="ClientApp\components\Board.tsx" />
     <None Remove="ClientApp\components\FormTextField.tsx" />
+    <None Remove="ClientApp\components\Game.tsx" />
     <None Remove="ClientApp\components\Private.tsx" />
     <None Remove="ClientApp\components\SeekListItem.tsx" />
     <None Remove="ClientApp\reducers\ConfigureStore.tsx" />
     <None Remove="ClientApp\reducers\Home.tsx" />
     <None Remove="ClientApp\reducers\RootReducer.tsx" />
     <None Remove="ClientApp\services\GameSeek.tsx" />
+    <None Remove="ClientApp\services\GameState.tsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,10 +49,12 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\components\Board.tsx" />
     <TypeScriptCompile Include="ClientApp\components\FormTextField.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Game.tsx" />
     <TypeScriptCompile Include="ClientApp\components\Private.tsx" />
     <TypeScriptCompile Include="ClientApp\components\SeekListItem.tsx" />
     <TypeScriptCompile Include="ClientApp\configureStore.tsx" />
     <TypeScriptCompile Include="ClientApp\reducers\RootReducer.tsx" />
+    <TypeScriptCompile Include="ClientApp\services\GameState.tsx" />
     <TypeScriptCompile Include="ClientApp\services\GameSeek.tsx" />
   </ItemGroup>
 

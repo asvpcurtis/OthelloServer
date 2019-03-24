@@ -38,35 +38,3 @@ export class GameSeek {
         this.connection.stop();
     }
 }
-
-/*
-const jwt: string = getJwt() || '{}';
-
-let connection = new signalR.HubConnectionBuilder()
-    .withUrl("/socket/seek", { accessTokenFactory: () => jwt })
-    .build();
-
-connection.on("send", data => {
-    console.log('received from server')
-    console.log(data);
-});
-
-connection.start()
-    //.then(() => connection.invoke("send", "Hello"));
-
-export function createSeek(parameters: SeekParameters) {
-    console.log('sending to server')
-    console.log(parameters)
-    connection.invoke("CallerUser", parameters)
-    //connection.invoke("send", "test")
-}
-
-export function cancelSeek() {
-    //connection.invoke("send", "cancel my seek");
-}
-
-export function acceptSeek() {
-    //connection.invoke("send", "accept this seek");
-
-}
-*/
