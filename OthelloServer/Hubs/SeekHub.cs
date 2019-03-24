@@ -16,50 +16,92 @@ namespace OthelloServer.Hubs
     {
         private readonly UserManager<AppUser> UserManager;
         private readonly SeekPool Pool;
-        public SeekHub(UserManager<AppUser> userManager, SeekPool pool)
+        public SeekHub(UserManager<AppUser> userManager, SeekPool pool) : base()
         {
             Pool = pool;
             UserManager = userManager;
         }
+        public override Task OnConnectedAsync()
+        {
+            Pool.AddSubscriber(CallerUser());
+            string user = Context.UserIdentifier;
+            List<ConnectedUser> releventSeekers = Pool.GetRelevantSeekers(user);
+            Clients.User(user).SendAsync("UpdateSeeks", releventSeekers);
+            return base.OnConnectedAsync();
+        }
+        public override Task OnDisconnectedAsync(Exception e)
+        {
+            Pool.RemoveSeek(Context.UserIdentifier);
+            Pool.RemoveSubscriber(Context.UserIdentifier);
+            return base.OnDisconnectedAsync(e);
+        }
+
         public void CreateSeek(SeekParameters data)
         {
-            // this is actually their username which is neat
-            string sub = Context.UserIdentifier;
-            Seeker seeker = new Seeker
+            ConnectedUser seeker = CallerUser();
+            if (seeker == null)
             {
-                Name = sub,
-                Rating = 1700
-            };
-
+                return;
+            }
             Seek seek = new Seek(seeker, data);
-            Pool.Add(seek);
-            //Clients.All.SendAsync("send", Pool.GetRelevantSeekers(seeker));
-            //Clients.All.SendAsync("send", sub);
-            // can actually send messages by username also neat
-            Clients.User(sub).SendAsync("send", sub);
+            string compatibleSeeker = Pool.FindCompatibleSeeker(seek);
+            if (compatibleSeeker != null)
+            {
+                Pool.RemoveSeek(compatibleSeeker);
+                string gameId = "lskjndf";
+                Clients.User(seeker.Name).SendAsync("GameMade", gameId);
+                Clients.User(compatibleSeeker).SendAsync("GameMade", gameId);
+            }
+            else
+            {
+                Pool.AddSeek(seek);
+            }
+            UpdateSubscribers();
         }
 
-        public Task CancelSeek()
+        public void CancelSeek()
         {
-            return Clients.All.SendAsync("send", "seek cancelled");
+            string seeker = Context.UserIdentifier;
+            if (seeker != null)
+            {
+                Pool.RemoveSeek(seeker);
+                UpdateSubscribers();
+            }
         }
 
-        public Task AcceptSeek(Seeker data)
+        public void AcceptSeek(string seeker)
         {
-            return Clients.All.SendAsync("send", "accepted seek");
+            if (Pool.IsAcceptableSeek(Context.UserIdentifier, seeker))
+            {
+                Pool.RemoveSeek(seeker);
+                //game gets created
+            }
+            UpdateSubscribers();
+            //return Clients.All.SendAsync("send", "accepted seek");
         }
-
-        // how to authenticate signalr
-        //https://docs.microsoft.com/en-us/aspnet/core/signalr/authn-and-authz?view=aspnetcore-2.2
-
-        // signalr at microsoft build (things have changed since though)
-        //https://www.youtube.com/watch?v=1TrttIkbs6c
-
-        // clients subscribe to a list of current seeks
-        // clients only see seeks that they can accept
-        // client either makes a seek, cancels a seek or accepts a seek
-        // if a seek is made then check open seeks if a pairing can be made between seeks then make a game else add to open seeks
-        // if a user cancels their seek then remove their seek from the open seeks (if one exists since could be a hacked client)
-        // if a user accepts a seek then verify that the accepted seek still exists
+        private ConnectedUser CallerUser()
+        {
+            string userName = Context.UserIdentifier;
+            AppUser user = UserManager.FindByNameAsync(userName).Result;
+            if (user == null)
+            {
+                return null;
+            }
+            ConnectedUser seeker = new ConnectedUser
+            {
+                Name = user.UserName,
+                Rating = user.Rating
+            };
+            return seeker;
+        }
+        private void UpdateSubscribers()
+        {
+            List<string> subscribers = Pool.GetSubscribers();
+            foreach (string user in subscribers)
+            {
+                List<ConnectedUser> releventSeekers = Pool.GetRelevantSeekers(user);
+                Clients.User(user).SendAsync("UpdateSeeks", releventSeekers);
+            }
+        }
     }
 }

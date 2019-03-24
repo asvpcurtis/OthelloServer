@@ -55,8 +55,9 @@ export class Login extends React.Component<RouteComponentProps<{}>, {}> {
                         inputId='email'
                         onChange={this.handleChange}
                         inputType='text'
-                        inputText=''
+                        inputText={this.state.email}
                         error={this.state.error.Email}
+                        inputDisabled={false}
                     />
                     <FormTextField
                         inputName='password'
@@ -64,8 +65,9 @@ export class Login extends React.Component<RouteComponentProps<{}>, {}> {
                         inputId='password'
                         inputType='password'
                         onChange={this.handleChange}
-                        inputText=''
+                        inputText={this.state.password}
                         error={this.state.error.Password}
+                        inputDisabled={false}
                     />
                     <div className="form-actions single">
                         <button className="btn btn-primary" type="submit">Sign In</button>

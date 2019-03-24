@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OthelloServer.ViewModels
 {
-    public class Seeker
+    public class ConnectedUser
     {
         [Required]
         public string Name { get; set; }

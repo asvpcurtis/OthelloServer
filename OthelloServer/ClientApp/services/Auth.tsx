@@ -38,8 +38,8 @@ export function login(data: LoginModel,
             promise.then(payload => {
                 localStorage.setItem(JwtKey, payload.token);
                 localStorage.setItem(JwtExpirationKey, payload.expiration);
+                success();
             });
-            success();
         }
         else {
             const promise: Promise<LoginFailure> = response.json();

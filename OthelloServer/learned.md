@@ -65,6 +65,8 @@ https://nguyentoanuit.wordpress.com/2017/11/25/setup-asp-net-core-react-redux/ht
  * 2 types of components
 	* stateless functional components
 	* stateful object components
+* where to initialize data
+	* https://medium.com/@marikalam/react-basic-constructor-componentdidmount-and-render-9476f8d28f0f
 
 ## Quest to implement login/register
 * https://fullstackmark.com/post/13/jwt-authentication-with-aspnet-core-2-web-api-angular-5-net-core-identity-and-facebook-login
@@ -92,3 +94,14 @@ https://nguyentoanuit.wordpress.com/2017/11/25/setup-asp-net-core-react-redux/ht
 		* this applies migrations to the database
 		* requires being able to build the project
 	* https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/
+
+## SignalR
+* how to authenticate signalr
+	* https://docs.microsoft.com/en-us/aspnet/core/signalr/authn-and-authz?view=aspnetcore-2.2
+* signalr at microsoft build (things have changed since though)
+	* https://www.youtube.com/watch?v=1TrttIkbs6c
+
+## bugs found
+* SignalR Hub disposes userManager before async Tasks finish
+	* solution is to avoid using async methods
+	* async methods outlive the lifetime of the disposed dbcontext

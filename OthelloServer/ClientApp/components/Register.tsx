@@ -62,8 +62,9 @@ export class Register extends React.Component<RouteComponentProps<{}>, {}> {
                         inputId='username'
                         inputType='text'
                         onChange={this.handleChange}
-                        inputText=''
+                        inputText={this.state.username}
                         error={fail.UserName ? fail.UserName : fail.DuplicateUserName}
+                        inputDisabled={false}
                     />
                     <FormTextField
                         inputName='email'
@@ -71,8 +72,9 @@ export class Register extends React.Component<RouteComponentProps<{}>, {}> {
                         inputId='email'
                         inputType='text'
                         onChange={this.handleChange}
-                        inputText=''
+                        inputText={this.state.email}
                         error={fail.Email ? fail.Email : fail.DuplicateEmail}
+                        inputDisabled={false}
                     />
                     <FormTextField
                         inputName='password'
@@ -80,8 +82,9 @@ export class Register extends React.Component<RouteComponentProps<{}>, {}> {
                         inputId='password'
                         inputType='password'
                         onChange={this.handleChange}
-                        inputText=''
+                        inputText={this.state.password}
                         error={fail.Password ? fail.Password : fail.PasswordTooShort}
+                        inputDisabled={false}
                     />
                     <div className="form-actions single">
                         <button className="btn btn-primary" type="submit">Register</button>
@@ -89,7 +92,7 @@ export class Register extends React.Component<RouteComponentProps<{}>, {}> {
                 </form>
             </div>
             <div className="os-form">
-                Have an Account? <Link to="/">Login</Link>
+                Have an Account? <Link to="/login">Login</Link>
             </div>
         </div>;
     }

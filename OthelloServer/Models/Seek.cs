@@ -8,9 +8,9 @@ namespace OthelloServer.Models
 {
     public class Seek
     {
-        public readonly Seeker Seeker;
+        public readonly ConnectedUser Seeker;
         public readonly SeekParameters Parameters;
-        public Seek(Seeker seeker, SeekParameters parameters)
+        public Seek(ConnectedUser seeker, SeekParameters parameters)
         {
             Seeker = seeker;
             Parameters = parameters;
