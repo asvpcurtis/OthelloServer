@@ -2,7 +2,7 @@
 https://nguyentoanuit.wordpress.com/2017/11/25/setup-asp-net-core-react-redux/https://stackoverflow.com/questions/22842691/what-is-the-meaning-of-the-dist-directory-in-open-source-projects
 ## Webpack
 * webpack.config.js
-* is used to specify things like dis and boot-client
+* is used to specify things like dist and boot-client
 * 4 main concepts
     1. entry
         * entry: { 'main-client': './ClientApp/boot-client.tsx' }
@@ -65,6 +65,8 @@ https://nguyentoanuit.wordpress.com/2017/11/25/setup-asp-net-core-react-redux/ht
  * 2 types of components
 	* stateless functional components
 	* stateful object components
+* where to initialize data
+	* https://medium.com/@marikalam/react-basic-constructor-componentdidmount-and-render-9476f8d28f0f
 
 ## Quest to implement login/register
 * https://fullstackmark.com/post/13/jwt-authentication-with-aspnet-core-2-web-api-angular-5-net-core-identity-and-facebook-login
@@ -81,3 +83,25 @@ https://nguyentoanuit.wordpress.com/2017/11/25/setup-asp-net-core-react-redux/ht
 	* similar to react router dom
 	* router in sync with application state
 * https://stackoverflow.com/questions/43185222/what-is-difference-between-react-router-4-0-react-router-dom-and-react-router-r
+
+## Entity framework
+* Migrations
+	* `dotnet ef migrations add [name for the migration]`
+		* this can be used to create OR update a class
+		* generates a migration file for this
+		* requires being able to build the project
+	* `dotnet ef database update`
+		* this applies migrations to the database
+		* requires being able to build the project
+	* https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/
+
+## SignalR
+* how to authenticate signalr
+	* https://docs.microsoft.com/en-us/aspnet/core/signalr/authn-and-authz?view=aspnetcore-2.2
+* signalr at microsoft build (things have changed since though)
+	* https://www.youtube.com/watch?v=1TrttIkbs6c
+
+## bugs found
+* SignalR Hub disposes userManager before async Tasks finish
+	* solution is to avoid using async methods
+	* async methods outlive the lifetime of the disposed dbcontext

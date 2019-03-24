@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace OthelloServer.ViewModels
 {
-    public class RegistrationViewModel
+    public class ConnectedUser
     {
         [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+        public string Name { get; set; }
         [Required]
-        public string Password { get; set; }
-        [Required]
-        public string UserName { get; set; }
+        public int Rating { get; set; }
     }
 }

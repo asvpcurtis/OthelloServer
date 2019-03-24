@@ -1,18 +1,11 @@
-﻿import { Reducer, combineReducers, ReducersMapObject } from "redux";
-import { routerReducer } from "react-router-redux";
-//import * as Home from './Home';
-import { LoginModel } from '../models/LoginModel'
+﻿import { Reducer, combineReducers } from "redux";
+import { LoginModel } from '../services/auth'
 
 export interface ApplicationState {
-    //todos: LoginModel;
+    loginState: LoginModel | null;
     //router?: any;
 }
 
-const reducers: ReducersMapObject = {
-//    home: Home.reducer
-};
-
 export const rootReducer: Reducer<ApplicationState> = combineReducers<ApplicationState>({
-    ...reducers,
-    routing: routerReducer
+    //auth: Auth.reducer
 });

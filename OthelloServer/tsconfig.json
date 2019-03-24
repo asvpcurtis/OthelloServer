@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
-      "paths": { "*": ["types/*"] },
     "baseUrl": ".",
+    "jsx": "react",
+    "lib": [ "es5", "es2015.symbol", "es2015.symbol.wellknown", "dom" ],
     "module": "es2015",
     "moduleResolution": "node",
-    "target": "es5",
-    "jsx": "react",
-    "sourceMap": true,
+    "paths": { "*": [ "types/*" ] },
     "skipDefaultLibCheck": true,
+    "sourceMap": true,
     "strict": true,
-    "types": ["webpack-env"]
+    "target": "es5",
+    "types": [ "webpack-env" ]
   },
   "exclude": [
       "bin",

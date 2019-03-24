@@ -18,16 +18,28 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\models\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\models\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="ClientApp\models\**" />
+    <None Remove="ClientApp\models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\components\Board.tsx" />
     <None Remove="ClientApp\components\FormTextField.tsx" />
-    <None Remove="ClientApp\models\LoginModel.tsx" />
+    <None Remove="ClientApp\components\Game.tsx" />
+    <None Remove="ClientApp\components\Private.tsx" />
+    <None Remove="ClientApp\components\SeekListItem.tsx" />
     <None Remove="ClientApp\reducers\ConfigureStore.tsx" />
     <None Remove="ClientApp\reducers\Home.tsx" />
     <None Remove="ClientApp\reducers\RootReducer.tsx" />
+    <None Remove="ClientApp\services\GameSeek.tsx" />
+    <None Remove="ClientApp\services\GameState.tsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,11 +47,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\Board.tsx" />
     <TypeScriptCompile Include="ClientApp\components\FormTextField.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Game.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Private.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\SeekListItem.tsx" />
     <TypeScriptCompile Include="ClientApp\configureStore.tsx" />
-    <TypeScriptCompile Include="ClientApp\models\LoginModel.tsx" />
-    <TypeScriptCompile Include="ClientApp\reducers\Home.tsx" />
     <TypeScriptCompile Include="ClientApp\reducers\RootReducer.tsx" />
+    <TypeScriptCompile Include="ClientApp\services\GameState.tsx" />
+    <TypeScriptCompile Include="ClientApp\services\GameSeek.tsx" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
