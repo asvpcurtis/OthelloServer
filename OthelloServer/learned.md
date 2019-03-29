@@ -85,7 +85,11 @@ https://nguyentoanuit.wordpress.com/2017/11/25/setup-asp-net-core-react-redux/ht
 * https://stackoverflow.com/questions/43185222/what-is-difference-between-react-router-4-0-react-router-dom-and-react-router-r
 
 ## Entity framework
+* Documentation
+	* http://www.entityframeworktutorial.net/efcore/entity-framework-core.aspx
 * Migrations
+	* `dotnet ef enable migrations`
+		* only ever need to do once for the lifetime of the project
 	* `dotnet ef migrations add [name for the migration]`
 		* this can be used to create OR update a class
 		* generates a migration file for this

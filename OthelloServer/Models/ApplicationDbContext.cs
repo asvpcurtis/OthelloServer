@@ -13,7 +13,14 @@ namespace OthelloServer.Models
         : base(options)
         {
         }
-
-        //public DbSet<Customer> Customers { get; set; }
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Move>()
+                .HasKey(m => new { m.GameId, m.MoveNumber });
+        }
+        public DbSet<Game> Games { get; set; }
+        
     }
 }

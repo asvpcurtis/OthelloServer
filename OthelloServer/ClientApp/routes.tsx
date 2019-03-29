@@ -7,6 +7,7 @@ import { FetchData } from './examples/FetchData';
 import { Counter } from './examples/Counter';
 import { Private } from './components/Private';
 import { Seek } from './components/Seek';
+import { Game } from './components/Game'
 
 export const routes = 
     <Switch>
@@ -15,13 +16,13 @@ export const routes =
         <Private>
             <Route path='/counter' component={Counter} />
             <Route exact path='/' component={Seek} />
+            <Route path='/game/:gameId' component={Game}/>
         </Private>
         <Route component={RoutesWithNavbar} />
     </Switch>;
 
 function RoutesWithNavbar() {
     return (<Layout>
-        
         <Route path='/fetchdata' component={FetchData} />
     </Layout>)
 }

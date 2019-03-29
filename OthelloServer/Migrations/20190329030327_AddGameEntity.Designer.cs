@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OthelloServer.Models;
 
 namespace OthelloServer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190329030327_AddGameEntity")]
+    partial class AddGameEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -200,15 +202,18 @@ namespace OthelloServer.Migrations
 
             modelBuilder.Entity("OthelloServer.Models.Move", b =>
                 {
-                    b.Property<Guid>("GameId");
+                    b.Property<int>("MoveNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("MoveNumber");
+                    b.Property<Guid?>("GameId");
 
-                    b.Property<int>("X");
+                    b.Property<string>("Square")
+                        .IsRequired();
 
-                    b.Property<int>("Y");
+                    b.HasKey("MoveNumber");
 
-                    b.HasKey("GameId", "MoveNumber");
+                    b.HasIndex("GameId");
 
                     b.ToTable("Move");
                 });
@@ -260,10 +265,9 @@ namespace OthelloServer.Migrations
 
             modelBuilder.Entity("OthelloServer.Models.Move", b =>
                 {
-                    b.HasOne("OthelloServer.Models.Game")
+                    b.HasOne("OthelloServer.Models.Game", "Game")
                         .WithMany("Moves")
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("GameId");
                 });
 #pragma warning restore 612, 618
         }

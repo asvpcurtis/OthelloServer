@@ -118,8 +118,10 @@ namespace OthelloServer
 
             services.AddSingleton(Configuration);
 
-            SeekPool pool = new SeekPool();
-            services.AddSingleton(pool);
+            SeekPool seekPool = new SeekPool();
+            services.AddSingleton(seekPool);
+            GamePool gamePool = new GamePool();
+            services.AddSingleton(gamePool);
 
 
             // Change to use Name as the user identifier for SignalR

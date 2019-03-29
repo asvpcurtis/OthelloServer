@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OthelloServer.Models;
 
 namespace OthelloServer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190329032218_RemoveGameEntity")]
+    partial class RemoveGameEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,37 +184,6 @@ namespace OthelloServer.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("OthelloServer.Models.Game", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("BlackPlayer")
-                        .IsRequired();
-
-                    b.Property<string>("WhitePlayer")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Games");
-                });
-
-            modelBuilder.Entity("OthelloServer.Models.Move", b =>
-                {
-                    b.Property<Guid>("GameId");
-
-                    b.Property<int>("MoveNumber");
-
-                    b.Property<int>("X");
-
-                    b.Property<int>("Y");
-
-                    b.HasKey("GameId", "MoveNumber");
-
-                    b.ToTable("Move");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -255,14 +226,6 @@ namespace OthelloServer.Migrations
                     b.HasOne("OthelloServer.Models.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("OthelloServer.Models.Move", b =>
-                {
-                    b.HasOne("OthelloServer.Models.Game")
-                        .WithMany("Moves")
-                        .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

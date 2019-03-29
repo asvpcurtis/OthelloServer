@@ -38,7 +38,7 @@ export class Seek extends React.Component<RouteComponentProps<{}>, {}> {
         this.connection.close();
     }
 
-    onClickCreateSeek = (e: any) => {
+    onClickCreateSeek = (e: any): void => {
         const param: SeekParameters = {
             min: this.state.min,
             max: this.state.max
@@ -47,12 +47,12 @@ export class Seek extends React.Component<RouteComponentProps<{}>, {}> {
         this.setState({seeking: true})
         this.connection.createSeek(param);
     }
-    onClickCancelSeek = (e: any) => {
+    onClickCancelSeek = (e: any): void => {
         console.log('canceling seek');
         this.setState({ seeking: false })
         this.connection.cancelSeek();
     }
-    onSeekItemClick = (e: any, name: string) => {
+    onSeekItemClick = (e: any, name: string): void => {
         console.log(name);
         this.connection.acceptSeek(name);
     }
